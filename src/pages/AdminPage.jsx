@@ -4,7 +4,7 @@ import { useCars } from '../context/CarsContext';
 import CarForm from '../components/admin/CarForm';
 import { Edit, Trash2, Plus, ArrowLeft, X } from 'lucide-react';
 
-const AdminPage: React.FC = () => {
+const AdminPage = () => {
   const { cars } = useCars();
   const [showForm, setShowForm] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
@@ -148,4 +148,4 @@ const AdminPage: React.FC = () => {
   );
 };
 
-export default AdminPage;
+export default AdminPage; 

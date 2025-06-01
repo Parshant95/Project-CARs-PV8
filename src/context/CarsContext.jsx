@@ -1,43 +1,34 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Car, Category } from '../types';
 import { cars as initialCars } from '../data/cars';
 import { categories as initialCategories } from '../data/categories';
 
-interface CarsContextProps {
-  cars: Car[];
-  categories: Category[];
-  addCar: (car: Omit<Car, 'id'>) => void;
-  getCarsByCategory: (categoryId: string) => Car[];
-  getCarById: (id: string) => Car | undefined;
-}
+const CarsContext = createContext(undefined);
 
-const CarsContext = createContext<CarsContextProps | undefined>(undefined);
-
-export const CarsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [cars, setCars] = useState<Car[]>(() => {
+export const CarsProvider = ({ children }) => {
+  const [cars, setCars] = useState(() => {
     const savedCars = localStorage.getItem('cars');
     return savedCars ? JSON.parse(savedCars) : initialCars;
   });
 
-  const [categories] = useState<Category[]>(initialCategories);
+  const [categories] = useState(initialCategories);
 
   useEffect(() => {
     localStorage.setItem('cars', JSON.stringify(cars));
   }, [cars]);
 
-  const addCar = (car: Omit<Car, 'id'>) => {
-    const newCar: Car = {
+  const addCar = (car) => {
+    const newCar = {
       ...car,
       id: crypto.randomUUID()
     };
     setCars(prevCars => [...prevCars, newCar]);
   };
 
-  const getCarsByCategory = (categoryId: string) => {
+  const getCarsByCategory = (categoryId) => {
     return cars.filter(car => car.category === categoryId);
   };
 
-  const getCarById = (id: string) => {
+  const getCarById = (id) => {
     return cars.find(car => car.id === id);
   };
 
@@ -54,4 +45,4 @@ export const useCars = () => {
     throw new Error('useCars must be used within a CarsProvider');
   }
   return context;
-};
+}; 

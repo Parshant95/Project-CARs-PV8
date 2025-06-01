@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Calendar, ExternalLink } from 'lucide-react';
-import { fetchNewsById, NewsItem } from '../lib/api';
+import { fetchNewsById } from '../lib/api';
 
-const NewsDetail: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const [news, setNews] = useState<NewsItem | null>(null);
+const NewsDetail = () => {
+  const { id } = useParams();
+  const [news, setNews] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const loadNews = async () => {

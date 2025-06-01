@@ -5,16 +5,18 @@ import CategoryCard from '../components/common/CategoryCard';
 import CarCard from '../components/common/CarCard';
 import { ChevronRight, Calendar, ArrowRight, Car, Zap, TrendingUp, FileText } from 'lucide-react';
 import BrandSlider from "../components/common/BrandSlider";
-import { fetchLatestNews, NewsItem } from '../lib/api';
+import { fetchLatestNews } from '../lib/api';
 import { auth } from '../lib/firebase';
+import SearchBar from '../components/SearchBar';
 
-const Home: React.FC = () => {
+const Home = () => {
   const { categories, cars } = useCars();
   const featuredCars = cars.slice(0, 4);
   const [userType, setUserType] = useState('user');
-  const [news, setNews] = useState<NewsItem[]>([]);
+  const [news, setNews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
+  const [searchResults, setSearchResults] = useState(null);
 
   useEffect(() => {
     // Check if user is logged in and has admin email
@@ -72,7 +74,7 @@ const Home: React.FC = () => {
     };
   }, []);
 
-  const getIconComponent = (iconName: string) => {
+  const getIconComponent = (iconName) => {
     switch (iconName) {
       case 'zap':
         return Zap;
@@ -85,6 +87,10 @@ const Home: React.FC = () => {
       default:
         return FileText;
     }
+  };
+
+  const handleSearch = (results) => {
+    setSearchResults(results);
   };
 
   return (
@@ -112,23 +118,40 @@ const Home: React.FC = () => {
           <p className="text-xl md:text-2xl mb-8 max-w-2xl">
             Discover the finest automobiles from around the world with detailed specifications and stunning imagery.
           </p>
- 
+          
+          {/* Add SearchBar component */}
+          <div className="mb-8">
+            <SearchBar onSearch={handleSearch} />
+          </div>
+
           <div className="flex flex-wrap gap-4">
             <Link to="/category/sports" className="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-md text-white font-medium transition-colors">
               Explore Sports Cars
             </Link>
-            {
-              userType === 'admin' ? (
-            <Link to="/admin" className="bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-md text-white font-medium transition-colors">
-              Add New Car
-            </Link>) : (<p></p>)
-            }
+            {userType === 'admin' && (
+              <Link to="/admin" className="bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-md text-white font-medium transition-colors">
+                Add New Car
+              </Link>
+            )}
           </div>
         </div>
       </section>
 
-       <div>
+      {/* Display AI Search Results */}
+      {searchResults && (
+        <section className="py-8 bg-gray-800">
+          <div className="container mx-auto px-6">
+            <h2 className="text-2xl font-bold mb-6">AI Recommendations</h2>
+            <div className="bg-gray-700 rounded-lg p-6">
+              <pre className="whitespace-pre-wrap text-gray-200">
+                {JSON.stringify(searchResults, null, 2)}
+              </pre>
+            </div>
+          </div>
+        </section>
+      )}
 
+      <div>
         <section className="bg-auto py-8">
           <h2 className="text-3xl font-bold text-center mb-4">Our Trusted Brands</h2>
           <BrandSlider />
@@ -218,9 +241,6 @@ const Home: React.FC = () => {
         </section>
       </div>
       
-
-
-      
       {/* Categories Section */}
       <section className="py-16 bg-gradient-to-b from-gray-900 to-gray-800">
         <div className="container mx-auto px-6">
@@ -251,21 +271,8 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-b from-gray-800 to-gray-900">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to add your car?</h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Use our admin interface to add your own car models and descriptions to the collection.
-          </p>
-          <Link to="/admin" className="inline-block bg-red-600 hover:bg-red-700 px-8 py-4 rounded-md text-white font-medium text-lg transition-colors">
-            Get Started
-          </Link>
-        </div>
-      </section>
     </div>
   );
 };
 
-export default Home;
+export default Home; 

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Menu, X, Search, Car } from 'lucide-react';
 import { auth } from '../../lib/firebase';
 
-const Header: React.FC = () => {
+const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
@@ -90,4 +90,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default Header; 

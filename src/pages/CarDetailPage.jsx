@@ -3,8 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import { useCars } from '../context/CarsContext';
 import { ArrowLeft, Calendar, Fuel, BarChart, Thermometer as Speedometer, Car, ArrowRight } from 'lucide-react';
 
-const CarDetailPage: React.FC = () => {
-  const { carId } = useParams<{ carId: string }>();
+const CarDetailPage = () => {
+  const { carId } = useParams();
   const { getCarById, getCarsByCategory } = useCars();
   const car = getCarById(carId || '');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -239,4 +239,4 @@ const CarDetailPage: React.FC = () => {
   );
 };
 
-export default CarDetailPage;
+export default CarDetailPage; 

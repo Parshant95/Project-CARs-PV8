@@ -1,7 +1,6 @@
 import React from "react";
 
-const logos: string[] = [
- 
+const logos = [
   "https://pngimg.com/uploads/porsche_logo/porsche_logo_PNG1.png",
   "https://www.pngmart.com/files/17/Suzuki-Logo-Transparent-Background.png",
   "https://gallerypng.com/wp-content/uploads/2024/05/mahindra-new-logo-png-image.png",
@@ -14,7 +13,7 @@ const logos: string[] = [
   "https://clipart-library.com/new_gallery/28-284493_toyota-logo-and-slogan-png-download-toyota.png",
 ];
 
-const BrandSlider: React.FC = () => {
+const BrandSlider = () => {
   return (
     <div className="w-full overflow-hidden bg-gray-900 py-4">
       <div className="flex animate-slide whitespace-nowrap">
@@ -32,4 +31,4 @@ const BrandSlider: React.FC = () => {
   );
 };
 
-export default BrandSlider;
+export default BrandSlider; 

@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import { User } from 'firebase/auth';
 import { auth } from '../lib/firebase';
 import HeroSection from './HeroSection';
 import Footer from '../components/layout/Footer';
 
-const LandingPage: React.FC = () => {
+const LandingPage = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,4 +35,4 @@ const LandingPage: React.FC = () => {
   );
 }
 
-export default LandingPage;
+export default LandingPage; 

@@ -4,8 +4,8 @@ import { useCars } from '../context/CarsContext';
 import CarCard from '../components/common/CarCard';
 import { ArrowLeft } from 'lucide-react';
 
-const CategoryPage: React.FC = () => {
-  const { categoryId } = useParams<{ categoryId: string }>();
+const CategoryPage = () => {
+  const { categoryId } = useParams();
   const { getCarsByCategory, categories } = useCars();
   const [isLoading, setIsLoading] = useState(true);
   
@@ -95,4 +95,4 @@ const CategoryPage: React.FC = () => {
   );
 };
 
-export default CategoryPage;
+export default CategoryPage; 

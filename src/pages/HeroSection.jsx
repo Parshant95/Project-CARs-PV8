@@ -1,14 +1,9 @@
 import React from 'react';
-import { User } from 'firebase/auth';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '../lib/firebase';
 import Button from './Button';
 
-interface HeroSectionProps {
-  user: User | null;
-}
-
-const HeroSection: React.FC<HeroSectionProps> = ({ user }) => {
+const HeroSection = ({ user }) => {
   const handleGoogleLogin = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
@@ -98,4 +93,4 @@ const HeroSection: React.FC<HeroSectionProps> = ({ user }) => {
   );
 };
 
-export default HeroSection;
+export default HeroSection; 

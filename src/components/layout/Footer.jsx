@@ -3,7 +3,7 @@ import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, Car, LogOu
 import { auth } from '../../lib/firebase';
 import { signOut } from 'firebase/auth';
 
-const Footer: React.FC = () => {
+const Footer = () => {
   const handleSignOut = async () => {
     try {
       await signOut(auth);
@@ -83,7 +83,6 @@ const Footer: React.FC = () => {
                 <Mail className="h-5 w-5 text-blue-500 mr-2" />
                 <a href="mailto:info@luxdrive.com" className="text-gray-400 hover:text-white transition-colors">
                   parshantavrdhan8@gmail.com
-                  
                 </a>
               </li>
             </ul>
@@ -127,4 +126,4 @@ const Footer: React.FC = () => {
   );
 };
 
-export default Footer;
+export default Footer; 

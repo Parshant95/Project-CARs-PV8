@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
 import { Menu, X, Car, UserCircle } from 'lucide-react';
-import { User, signOut } from 'firebase/auth';
+import { signOut } from 'firebase/auth';
 import { auth } from '../lib/firebase';
 
-interface NavbarProps {
-  scrolled: boolean;
-  user: User | null;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ scrolled, user }) => {
+const Navbar = ({ scrolled, user }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -135,4 +130,4 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled, user }) => {
   );
 };
 
-export default Navbar;
+export default Navbar; 

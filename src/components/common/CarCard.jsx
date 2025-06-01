@@ -1,13 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Car as CarType } from '../../types';
 import { ArrowRight } from 'lucide-react';
 
-interface CarCardProps {
-  car: CarType;
-}
-
-const CarCard: React.FC<CarCardProps> = ({ car }) => {
+const CarCard = ({ car }) => {
   return (
     <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:scale-[1.02] transition-transform duration-300">
       <div className="relative h-48">
@@ -52,4 +47,4 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
   );
 };
 
-export default CarCard;
+export default CarCard; 

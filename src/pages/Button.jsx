@@ -1,15 +1,6 @@
 import React from 'react';
 
-interface ButtonProps {
-  children: React.ReactNode;
-  variant?: 'primary' | 'secondary' | 'outline';
-  href?: string;
-  className?: string;
-  style?: React.CSSProperties;
-  onClick?: () => void;
-}
-
-const Button: React.FC<ButtonProps> = ({
+const Button = ({
   children,
   variant = 'primary',
   href,
@@ -42,4 +33,4 @@ const Button: React.FC<ButtonProps> = ({
   );
 };
 
-export default Button;
+export default Button; 

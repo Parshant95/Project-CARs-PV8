@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
 import { useCars } from '../../context/CarsContext';
-import { Car } from '../../types';
 import { Save, X } from 'lucide-react';
 
-interface CarFormProps {
-  onSuccess?: () => void;
-}
-
-const CarForm: React.FC<CarFormProps> = ({ onSuccess }) => {
+const CarForm = ({ onSuccess }) => {
   const { categories, addCar } = useCars();
-  const [formData, setFormData] = useState<Omit<Car, 'id'>>({
+  const [formData, setFormData] = useState({
     name: '',
     category: categories[0]?.id || 'sports',
     price: '',
@@ -20,11 +15,11 @@ const CarForm: React.FC<CarFormProps> = ({ onSuccess }) => {
     description: '',
     imageUrl: '',
   });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validate = () => {
-    const newErrors: Record<string, string> = {};
+    const newErrors = {};
     
     if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (!formData.price.trim()) newErrors.price = 'Price is required';
@@ -42,7 +37,7 @@ const CarForm: React.FC<CarFormProps> = ({ onSuccess }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (validate()) {
@@ -77,7 +72,7 @@ const CarForm: React.FC<CarFormProps> = ({ onSuccess }) => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -257,7 +252,7 @@ const CarForm: React.FC<CarFormProps> = ({ onSuccess }) => {
             description: '',
             imageUrl: '',
           })}
-          className="inline-flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-6 py-2 rounded-md transition-colors"
+          className="inline-flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-6 py-2 rounded-md transition-all duration-300"
         >
           <X className="h-4 w-4" />
           Reset
@@ -267,4 +262,4 @@ const CarForm: React.FC<CarFormProps> = ({ onSuccess }) => {
   );
 };
 
-export default CarForm;
+export default CarForm; 

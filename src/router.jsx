@@ -1,9 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import Home from './pages/Home';
-import CategoryPage from './pages/CategoryPage';
 import CarDetailPage from './pages/CarDetailPage';
+import CategoryPage from './pages/CategoryPage';
 import AdminPage from './pages/AdminPage';
+import NewsDetail from './pages/NewsDetail';
 import LandingPage from './pages/LandingPage';
 
 const router = createBrowserRouter([
@@ -12,28 +13,31 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: '/',
+        index: true,
         element: <LandingPage />
       },
       {
-        index: true,
-        path: "/home",
+        path: 'home',
         element: <Home />
-      },
-      {
-        path: 'category/:categoryId',
-        element: <CategoryPage />
       },
       {
         path: 'car/:carId',
         element: <CarDetailPage />
       },
       {
+        path: 'category/:categoryId',
+        element: <CategoryPage />
+      },
+      {
         path: 'admin',
         element: <AdminPage />
+      },
+      {
+        path: 'news/:id',
+        element: <NewsDetail />
       }
     ]
   }
 ]);
 
-export default router;
+export default router; 
