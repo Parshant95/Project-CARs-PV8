@@ -5,28 +5,52 @@ const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
   const [budget, setBudget] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleSearch = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(null);
+
+    // Check if API key and endpoint are available
+    const apiKey = import.meta.env.VITE_GROK_API_KEY;
+    const apiEndpoint = 'https://api.grok.ai/v1/chat/completions';
+
+    if (!apiKey) {
+      setError('API configuration is missing. Please check your environment variables.');
+      setIsLoading(false);
+      return;
+    }
 
     try {
-      const response = await fetch(import.meta.env.VITE_DEEPSEEK_API_ENDPOINT, {
+      console.log('Sending request to Grok API');
+      const response = await fetch(apiEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_DEEPSEEK_API_KEY}`
+          'Authorization': `Bearer ${apiKey}`
         },
         body: JSON.stringify({
-          query: `Find cars within ${budget} budget with these preferences: ${query}`,
+          model: "grok-1",
+          messages: [{
+            role: "user",
+            content: `Find cars within ${budget} budget with these preferences: ${query}. Please provide a detailed response with specific car models, their features, and why they would be good matches.`
+          }],
           max_tokens: 500
         })
       });
 
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error?.message || 'API request failed');
+      }
+
       const data = await response.json();
+      console.log('API Response:', data);
       onSearch(data);
     } catch (error) {
       console.error('Error searching cars:', error);
+      setError(error.message || 'Failed to search cars. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -69,6 +93,11 @@ const SearchBar = ({ onSearch }) => {
             )}
           </button>
         </div>
+        {error && (
+          <div className="text-red-500 text-sm mt-2">
+            {error}
+          </div>
+        )}
       </form>
     </div>
   );
