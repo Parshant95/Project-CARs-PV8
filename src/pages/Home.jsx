@@ -6,17 +6,47 @@ import CarCard from '../components/common/CarCard';
 import { ChevronRight, Calendar, ArrowRight, Car, Zap, TrendingUp, FileText } from 'lucide-react';
 import BrandSlider from "../components/common/BrandSlider";
 import { fetchLatestNews } from '../lib/api';
+<<<<<<< HEAD
 import SearchBar from '../components/SearchBar';
 import { useAuth } from '../context/AuthContext';
+=======
+import { auth } from '../lib/firebase';
+import SearchBar from '../components/SearchBar';
+>>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
 
 const Home = () => {
   const { categories, cars } = useCars();
   const featuredCars = cars.slice(0, 4);
+<<<<<<< HEAD
+=======
+  const [userType, setUserType] = useState('user');
+>>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
   const [news, setNews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchResults, setSearchResults] = useState(null);
+<<<<<<< HEAD
   const { user } = useAuth();
+=======
+
+  useEffect(() => {
+    // Check if user is logged in and has admin email
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      console.log('Home - Current user:', user?.email); // Debug log
+      if (user && user.email === 'ridergamer260@gmail.com' || user && user.email === 'parshantvardhan63@gmail.com') {
+        console.log('Home - Setting admin access'); // Debug log
+        setUserType('admin');
+        localStorage.setItem('userType', 'admin');
+      } else {
+        console.log('Home - Setting regular user access'); // Debug log
+        setUserType('user');
+        localStorage.setItem('userType', 'user');
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+>>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
 
   useEffect(() => {
     let isMounted = true;
@@ -87,7 +117,11 @@ const Home = () => {
             playsInline
             className="w-full h-full object-cover"
           >
+<<<<<<< HEAD
             <source src="src\\data\\Projectcars.mp4" type="video/mp4" />
+=======
+            <source src="src\data\Projectcars.mp4" type="video/mp4" />
+>>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
             Your browser does not support the video tag.
           </video>
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent"></div>
@@ -110,9 +144,15 @@ const Home = () => {
             <Link to="/category/sports" className="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-md text-white font-medium transition-colors">
               Explore Sports Cars
             </Link>
+<<<<<<< HEAD
             {user && user.email === 'parshantvardhan63@gmail.com' && (
               <Link to="/admin" className="bg-gray-700 hover:bg-gray-800 px-6 py-3 rounded-md text-white font-medium transition-colors">
                 Admin
+=======
+            {userType === 'admin' && (
+              <Link to="/admin" className="bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-md text-white font-medium transition-colors">
+                Add New Car
+>>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
               </Link>
             )}
           </div>

@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import { Menu, X, Car, UserCircle } from 'lucide-react';
+<<<<<<< HEAD
+=======
+import { signOut } from 'firebase/auth';
+import { auth } from '../lib/firebase';
+>>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
 
 const Navbar = ({ scrolled, user }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -8,6 +13,17 @@ const Navbar = ({ scrolled, user }) => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+<<<<<<< HEAD
+=======
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
+
+>>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
   return (
     <header 
       className={`fixed w-full z-50 transition-all duration-300 ${
@@ -39,6 +55,31 @@ const Navbar = ({ scrolled, user }) => {
                 {item}
               </a>
             ))}
+<<<<<<< HEAD
+=======
+            {user && (
+              <div className="flex items-center space-x-4">
+                <div className="flex items-center">
+                  {user.photoURL ? (
+                    <img src={user.photoURL} alt="Profile" className="w-8 h-8 rounded-full" />
+                  ) : (
+                    <UserCircle className={`w-8 h-8 ${scrolled ? 'text-gray-600' : 'text-white'}`} />
+                  )}
+                  <span className={`ml-2 text-sm ${scrolled ? 'text-gray-600' : 'text-white'}`}>
+                    {user.displayName || user.email}
+                  </span>
+                </div>
+                <button
+                  onClick={handleSignOut}
+                  className={`text-sm font-medium ${
+                    scrolled ? 'text-gray-600 hover:text-blue-600' : 'text-white hover:text-blue-300'
+                  }`}
+                >
+                  Sign Out
+                </button>
+              </div>
+            )}
+>>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
           </nav>
 
           {/* Mobile menu button */}
@@ -74,6 +115,27 @@ const Navbar = ({ scrolled, user }) => {
               {item}
             </a>
           ))}
+<<<<<<< HEAD
+=======
+          {user && (
+            <>
+              <div className="px-3 py-2 flex items-center">
+                {user.photoURL ? (
+                  <img src={user.photoURL} alt="Profile" className="w-8 h-8 rounded-full" />
+                ) : (
+                  <UserCircle className="w-8 h-8 text-gray-600" />
+                )}
+                <span className="ml-2 text-gray-700">{user.displayName || user.email}</span>
+              </div>
+              <button
+                onClick={handleSignOut}
+                className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+              >
+                Sign Out
+              </button>
+            </>
+          )}
+>>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
         </div>
       </div>
     </header>
