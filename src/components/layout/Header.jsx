@@ -24,7 +24,6 @@ const Header = () => {
           <Link to="/category/sports" className="hover:text-red-500 transition-colors">Sports</Link>
           <Link to="/category/electric" className="hover:text-red-500 transition-colors">Electric</Link>
           <Link to="/category/suv" className="hover:text-red-500 transition-colors">SUVs</Link>
-          {/* Admin link removed - Firebase authentication disabled */}
         </div>
 
         <div className="hidden md:flex relative">
@@ -64,7 +63,6 @@ const Header = () => {
             <Link to="/category/sports" className="hover:text-red-500 transition-colors py-2 border-b border-gray-700" onClick={() => setIsOpen(false)}>Sports</Link>
             <Link to="/category/electric" className="hover:text-red-500 transition-colors py-2 border-b border-gray-700" onClick={() => setIsOpen(false)}>Electric</Link>
             <Link to="/category/suv" className="hover:text-red-500 transition-colors py-2 border-b border-gray-700" onClick={() => setIsOpen(false)}>SUVs</Link>
-            {/* Admin link removed - Firebase authentication disabled */}
           </div>
         </div>
       )}

@@ -1,7 +1,9 @@
 import React from 'react';
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, Car } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
 
 const Footer = () => {
+  const { user, logout } = useAuth();
 
   return (
     <footer className="bg-gray-900 text-white">
@@ -98,6 +100,14 @@ const Footer = () => {
                 Subscribe
               </button>
             </form>
+            {user && (
+              <button
+                onClick={logout}
+                className="mt-4 w-full px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-md transition-colors"
+              >
+                Logout
+              </button>
+            )}
           </div>
         </div>
 

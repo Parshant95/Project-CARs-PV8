@@ -12,18 +12,19 @@ const SearchBar = ({ onSearch }) => {
     setIsLoading(true);
     setError(null);
 
-    // Check if API key and endpoint are available
-    const apiKey = import.meta.env.VITE_GROK_API_KEY;
-    const apiEndpoint = 'https://api.grok.ai/v1/chat/completions';
+    // AIMLAPI API key and endpoint
+    // API key obtained from https://aimlapi.com/app/keys
+    const apiKey = 'cded9dfed61e4ee9b61a9acd78a9f325';
+    const apiEndpoint = 'https://api.aimlapi.com/v1/chat/completions';
 
     if (!apiKey) {
-      setError('API configuration is missing. Please check your environment variables.');
+      setError('API configuration is missing. Please check your API key.');
       setIsLoading(false);
       return;
     }
 
     try {
-      console.log('Sending request to Grok API');
+      console.log('Sending request to AIMLAPI');
       const response = await fetch(apiEndpoint, {
         method: 'POST',
         headers: {
@@ -31,9 +32,9 @@ const SearchBar = ({ onSearch }) => {
           'Authorization': `Bearer ${apiKey}`
         },
         body: JSON.stringify({
-          model: "grok-1",
+          model: 'gpt-3.5-turbo',
           messages: [{
-            role: "user",
+            role: 'user',
             content: `Find cars within ${budget} budget with these preferences: ${query}. Please provide a detailed response with specific car models, their features, and why they would be good matches.`
           }],
           max_tokens: 500

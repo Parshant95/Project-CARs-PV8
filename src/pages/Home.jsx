@@ -7,6 +7,7 @@ import { ChevronRight, Calendar, ArrowRight, Car, Zap, TrendingUp, FileText } fr
 import BrandSlider from "../components/common/BrandSlider";
 import { fetchLatestNews } from '../lib/api';
 import SearchBar from '../components/SearchBar';
+import { useAuth } from '../context/AuthContext';
 
 const Home = () => {
   const { categories, cars } = useCars();
@@ -15,6 +16,7 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchResults, setSearchResults] = useState(null);
+  const { user } = useAuth();
 
   useEffect(() => {
     let isMounted = true;
@@ -108,6 +110,11 @@ const Home = () => {
             <Link to="/category/sports" className="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-md text-white font-medium transition-colors">
               Explore Sports Cars
             </Link>
+            {user && user.email === 'parshantvardhan63@gmail.com' && (
+              <Link to="/admin" className="bg-gray-700 hover:bg-gray-800 px-6 py-3 rounded-md text-white font-medium transition-colors">
+                Admin
+              </Link>
+            )}
           </div>
         </div>
       </section>
