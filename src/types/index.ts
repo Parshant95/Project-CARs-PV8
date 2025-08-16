@@ -1,14 +1,13 @@
 export interface Car {
-  id: string;
-  name: string;
-  category: 'sports' | 'electric' | 'suv' | string;
-  price: string;
-  year: number;
-  mileage: string;
-  fuelType: string;
+  id: number;
+  brand_name: string;
+  model: string;
+  year: string;
+  fuel_type: string;
+  price: number;
   transmission: string;
-  description: string;
-  imageUrl: string;
+  engine: string;
+  image_url: string;
 }
 
 export interface Category {

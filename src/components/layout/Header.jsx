@@ -1,21 +1,11 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Menu, X, Search, Car } from 'lucide-react';
-=======
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Search, Car } from 'lucide-react';
 import { auth } from '../../lib/firebase';
->>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-<<<<<<< HEAD
-  // Note: Firebase authentication removed - admin access disabled
-  const isAdmin = false;
-=======
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
@@ -31,7 +21,6 @@ const Header = () => {
 
   // Debug log for current admin state
   console.log('Current isAdmin state:', isAdmin);
->>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
 
   return (
     <header className="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-4 px-6 shadow-lg">
@@ -49,12 +38,9 @@ const Header = () => {
           <Link to="/category/sports" className="hover:text-red-500 transition-colors">Sports</Link>
           <Link to="/category/electric" className="hover:text-red-500 transition-colors">Electric</Link>
           <Link to="/category/suv" className="hover:text-red-500 transition-colors">SUVs</Link>
-<<<<<<< HEAD
-=======
           {isAdmin && (
             <Link to="/admin" className="hover:text-red-500 transition-colors">Admin</Link>
           )}
->>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
         </div>
 
         <div className="hidden md:flex relative">
@@ -94,12 +80,9 @@ const Header = () => {
             <Link to="/category/sports" className="hover:text-red-500 transition-colors py-2 border-b border-gray-700" onClick={() => setIsOpen(false)}>Sports</Link>
             <Link to="/category/electric" className="hover:text-red-500 transition-colors py-2 border-b border-gray-700" onClick={() => setIsOpen(false)}>Electric</Link>
             <Link to="/category/suv" className="hover:text-red-500 transition-colors py-2 border-b border-gray-700" onClick={() => setIsOpen(false)}>SUVs</Link>
-<<<<<<< HEAD
-=======
             {isAdmin && (
               <Link to="/admin" className="hover:text-red-500 transition-colors py-2" onClick={() => setIsOpen(false)}>Admin</Link>
             )}
->>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
           </div>
         </div>
       )}

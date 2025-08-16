@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { Menu, X, Car, UserCircle } from 'lucide-react';
-<<<<<<< HEAD
-=======
 import { signOut } from 'firebase/auth';
 import { auth } from '../lib/firebase';
->>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
 
 const Navbar = ({ scrolled, user }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,8 +10,6 @@ const Navbar = ({ scrolled, user }) => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-<<<<<<< HEAD
-=======
   const handleSignOut = async () => {
     try {
       await signOut(auth);
@@ -23,7 +18,6 @@ const Navbar = ({ scrolled, user }) => {
     }
   };
 
->>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
   return (
     <header 
       className={`fixed w-full z-50 transition-all duration-300 ${
@@ -55,8 +49,6 @@ const Navbar = ({ scrolled, user }) => {
                 {item}
               </a>
             ))}
-<<<<<<< HEAD
-=======
             {user && (
               <div className="flex items-center space-x-4">
                 <div className="flex items-center">
@@ -79,7 +71,6 @@ const Navbar = ({ scrolled, user }) => {
                 </button>
               </div>
             )}
->>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
           </nav>
 
           {/* Mobile menu button */}
@@ -115,8 +106,6 @@ const Navbar = ({ scrolled, user }) => {
               {item}
             </a>
           ))}
-<<<<<<< HEAD
-=======
           {user && (
             <>
               <div className="px-3 py-2 flex items-center">
@@ -135,7 +124,6 @@ const Navbar = ({ scrolled, user }) => {
               </button>
             </>
           )}
->>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
         </div>
       </div>
     </header>

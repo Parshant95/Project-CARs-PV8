@@ -1,5 +1,3 @@
-import { Car } from '../types';
-
 export const cars = [
   {
     "brand_name": "Maruti Suzuki",
@@ -207,7 +205,7 @@ export const cars = [
     "price": 999000,
     "transmission": "Manual - 6 Gears, Sport Mode",
     "engine": "1199 cc, 3 Cylinders Inline, 2 Valves/Cylinder, SOHC",
-    "image_url": "https://api.example.com/images/cars/tata/curvv-2024-exterior-front-three-quarter.jpg",
+    "image_url": "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 19
   },
   {
@@ -218,7 +216,7 @@ export const cars = [
     "price": 613000,
     "transmission": "Manual - 5 Gears",
     "engine": "1199 cc, 3 Cylinders Inline, 4 Valves/Cylinder, SOHC",
-    "image_url": "https://api.example.com/images/cars/tata/punch-2024-exterior-front-three-quarter.jpg",
+    "image_url": "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 20
   },
   {
@@ -229,7 +227,7 @@ export const cars = [
     "price": 800000,
     "transmission": "Manual - 5 Gears, Sport Mode",
     "engine": "1199 cc, 3 Cylinders Inline, 2 Valves/Cylinder, SOHC",
-    "image_url": "https://api.example.com/images/cars/tata/nexon-2024-exterior-front-three-quarter.jpg",
+    "image_url": "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 21
   },
   {
@@ -240,7 +238,7 @@ export const cars = [
     "price": 1549000,
     "transmission": "Manual - 6 Gears, Sport Mode",
     "engine": "1956 cc, 4 Cylinders Inline, 4 Valves/Cylinder, DOHC",
-    "image_url": "https://api.example.com/images/cars/tata/harrier-2024-exterior-front-three-quarter.jpg",
+    "image_url": "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 22
   },
   {
@@ -251,7 +249,7 @@ export const cars = [
     "price": 1040000,
     "transmission": "Automatic - 1 Gears, Sport Mode",
     "engine": "Not Applicable Cylinders Not Applicable, Not Applicable Valves/Cylinder, Not Applicable",
-    "image_url": "https://api.example.com/images/cars/tata/curvv-ev-2024-exterior-front-three-quarter.jpg",
+    "image_url": "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 23
   },
   {
@@ -262,7 +260,7 @@ export const cars = [
     "price": 1619000,
     "transmission": "Manual - 6 Gears, Sport Mode",
     "engine": "1956 cc, 4 Cylinders Inline, 4 Valves/Cylinder, DOHC",
-    "image_url": "https://api.example.com/images/cars/tata/safari-2024-exterior-front-three-quarter.jpg",
+    "image_url": "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 24
   },
   {
@@ -273,7 +271,7 @@ export const cars = [
     "price": 665000,
     "transmission": "Manual - 5 Gears",
     "engine": "1199 cc, 3 Cylinders Inline, 4 Valves/Cylinder, SOHC",
-    "image_url": "https://api.example.com/images/cars/tata/altroz-2024-exterior-front-three-quarter.jpg",
+    "image_url": "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 25
   },
   {
@@ -284,7 +282,7 @@ export const cars = [
     "price": 565000,
     "transmission": "Manual - 5 Gears",
     "engine": "1199 cc, 3 Cylinders Inline, 4 Valves/Cylinder, SOHC",
-    "image_url": "https://api.example.com/images/cars/tata/tiago-2024-exterior-front-three-quarter.jpg",
+    "image_url": "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 26
   },
   {
@@ -295,7 +293,7 @@ export const cars = [
     "price": 799000,
     "transmission": "Automatic - 1 Gears, Sport Mode",
     "engine": "Not Applicable Cylinders Not Applicable, Not Applicable Valves/Cylinder, Not Applicable",
-    "image_url": "https://api.example.com/images/cars/tata/tiago-ev-2024-exterior-front-three-quarter.jpg",
+    "image_url": "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 27
   },
   {
@@ -306,7 +304,7 @@ export const cars = [
     "price": 630000,
     "transmission": "Manual - 5 Gears",
     "engine": "1199 cc, 3 Cylinders Inline, 4 Valves/Cylinder, SOHC",
-    "image_url": "https://api.example.com/images/cars/tata/tigor-2024-exterior-front-three-quarter.jpg",
+    "image_url": "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 28
   },
   {
@@ -317,7 +315,7 @@ export const cars = [
     "price": 670000,
     "transmission": "Manual - 5 Gears",
     "engine": "1199 cc, 3 Cylinders Inline, 4 Valves/Cylinder, SOHC",
-    "image_url": "https://api.example.com/images/cars/tata/tiago-nrg-2024-exterior-front-three-quarter.jpg",
+    "image_url": "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 29
   },
   {
@@ -328,7 +326,7 @@ export const cars = [
     "price": 1249000,
     "transmission": "Automatic - 1 Gears, Sport Mode",
     "engine": "Not Applicable Cylinders Not Applicable, Not Applicable Valves/Cylinder, Not Applicable",
-    "image_url": "https://api.example.com/images/cars/tata/tigor-ev-2024-exterior-front-three-quarter.jpg",
+    "image_url": "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 30
   },
   {
@@ -339,7 +337,7 @@ export const cars = [
     "price": 2400000,
     "transmission": "Automatic",
     "engine": "",
-    "image_url": "https://api.example.com/images/cars/tata/harrier-ev-2024-exterior-front-three-quarter.jpg",
+    "image_url": "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 31
   },
   {
@@ -350,7 +348,7 @@ export const cars = [
     "price": 1200000,
     "transmission": "Automatic",
     "engine": "",
-    "image_url": "https://api.example.com/images/cars/tata/altroz-ev-2024-exterior-front-three-quarter.jpg",
+    "image_url": "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 32
   },
   {
@@ -361,7 +359,7 @@ export const cars = [
     "price": 4000000,
     "transmission": "Automatic (TC) - 8 Gears, Manual Override & Paddle Shift, Sport Mode",
     "engine": "2151 cc, 4 Cylinders Inline, 4 Valves/Cylinder, DOHC",
-    "image_url": "https://api.example.com/images/cars/kia/new-carnival-2024-exterior-front-three-quarter.jpg",
+    "image_url": "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 33
   },
   {
@@ -372,7 +370,7 @@ export const cars = [
     "price": 9000000,
     "transmission": "Automatic",
     "engine": "",
-    "image_url": "https://api.example.com/images/cars/kia/new-ev9-2024-exterior-front-three-quarter.jpg",
+    "image_url": "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 34
   },
   {
@@ -383,7 +381,7 @@ export const cars = [
     "price": 1090000,
     "transmission": "Manual - 6 Gears",
     "engine": "1497 cc, 4 Cylinders Inline, 4 Valves/Cylinder, DOHC",
-    "image_url": "https://api.example.com/images/cars/kia/seltos-2024-exterior-front-three-quarter.jpg",
+    "image_url": "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "id": 35
   }
 ];

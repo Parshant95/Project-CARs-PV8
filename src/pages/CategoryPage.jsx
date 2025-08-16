@@ -6,11 +6,11 @@ import { ArrowLeft } from 'lucide-react';
 
 const CategoryPage = () => {
   const { categoryId } = useParams();
-  const { getCarsByCategory, categories } = useCars();
+  const { getCarsByCategory, categories, cars: allCars } = useCars();
   const [isLoading, setIsLoading] = useState(true);
   
   const category = categories.find(c => c.id === categoryId);
-  const cars = getCarsByCategory(categoryId || '');
+  const cars = categoryId === 'all' ? allCars : getCarsByCategory(categoryId || '');
 
   useEffect(() => {
     // Simulate loading
@@ -21,7 +21,7 @@ const CategoryPage = () => {
     return () => clearTimeout(timer);
   }, [categoryId]);
 
-  if (!category) {
+  if (!category && categoryId !== 'all') {
     return (
       <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
         <div className="text-center">
@@ -45,16 +45,20 @@ const CategoryPage = () => {
       <section className="relative h-[50vh]">
         <div className="absolute inset-0">
           <img 
-            src={category.imageUrl} 
-            alt={category.name}
+            src={categoryId === 'all' ? 'https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' : category.imageUrl} 
+            alt={categoryId === 'all' ? 'All Cars' : category.name}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/50"></div>
         </div>
         
         <div className="relative container mx-auto px-6 h-full flex flex-col justify-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">{category.name}</h1>
-          <p className="text-xl max-w-2xl">{category.description}</p>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            {categoryId === 'all' ? 'All Cars' : category.name}
+          </h1>
+          <p className="text-xl max-w-2xl">
+            {categoryId === 'all' ? 'Explore our complete collection of premium vehicles' : category.description}
+          </p>
         </div>
       </section>
 
@@ -62,7 +66,7 @@ const CategoryPage = () => {
       <section className="py-16">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl font-bold mb-10">
-            Explore Our {category.name}
+            {categoryId === 'all' ? 'All Available Cars' : `Explore Our ${category.name}`}
           </h2>
           
           {isLoading ? (

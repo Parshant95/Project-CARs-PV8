@@ -3,31 +3,21 @@ import { Link } from 'react-router-dom';
 import { useCars } from '../context/CarsContext';
 import CategoryCard from '../components/common/CategoryCard';
 import CarCard from '../components/common/CarCard';
+import CarList from '../components/CarList';
 import { ChevronRight, Calendar, ArrowRight, Car, Zap, TrendingUp, FileText } from 'lucide-react';
 import BrandSlider from "../components/common/BrandSlider";
 import { fetchLatestNews } from '../lib/api';
-<<<<<<< HEAD
-import SearchBar from '../components/SearchBar';
-import { useAuth } from '../context/AuthContext';
-=======
 import { auth } from '../lib/firebase';
 import SearchBar from '../components/SearchBar';
->>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
 
 const Home = () => {
   const { categories, cars } = useCars();
-  const featuredCars = cars.slice(0, 4);
-<<<<<<< HEAD
-=======
+  const featuredCars = cars.slice(0, 8);
   const [userType, setUserType] = useState('user');
->>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
   const [news, setNews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchResults, setSearchResults] = useState(null);
-<<<<<<< HEAD
-  const { user } = useAuth();
-=======
 
   useEffect(() => {
     // Check if user is logged in and has admin email
@@ -46,7 +36,6 @@ const Home = () => {
 
     return () => unsubscribe();
   }, []);
->>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
 
   useEffect(() => {
     let isMounted = true;
@@ -117,11 +106,7 @@ const Home = () => {
             playsInline
             className="w-full h-full object-cover"
           >
-<<<<<<< HEAD
-            <source src="src\\data\\Projectcars.mp4" type="video/mp4" />
-=======
             <source src="src\data\Projectcars.mp4" type="video/mp4" />
->>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
             Your browser does not support the video tag.
           </video>
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent"></div>
@@ -144,15 +129,9 @@ const Home = () => {
             <Link to="/category/sports" className="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-md text-white font-medium transition-colors">
               Explore Sports Cars
             </Link>
-<<<<<<< HEAD
-            {user && user.email === 'parshantvardhan63@gmail.com' && (
-              <Link to="/admin" className="bg-gray-700 hover:bg-gray-800 px-6 py-3 rounded-md text-white font-medium transition-colors">
-                Admin
-=======
             {userType === 'admin' && (
               <Link to="/admin" className="bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-md text-white font-medium transition-colors">
                 Add New Car
->>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
               </Link>
             )}
           </div>
@@ -276,21 +255,15 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Featured Cars Section */}
+      {/* Feature Cars Section */}
       <section className="py-16 bg-gray-800">
         <div className="container mx-auto px-6">
-          <div className="flex justify-between items-center mb-10">
-            <h2 className="text-3xl font-bold">Featured Cars</h2>
-            <Link to="/cars" className="inline-flex items-center text-red-500 hover:text-red-400 transition-colors">
-              View All Cars <ChevronRight className="h-5 w-5 ml-1" />
-            </Link>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4 text-gray-100">Featured Cars</h2>
+            <p className="text-gray-100 text-lg">Discover our handpicked selection of premium vehicles</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {featuredCars.map(car => (
-              <CarCard key={car.id} car={car} />
-            ))}
-          </div>
+          <CarList limit={8} />
         </div>
       </section>
     </div>

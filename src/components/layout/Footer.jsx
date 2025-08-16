@@ -1,11 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
-import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, Car } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
-
-const Footer = () => {
-  const { user, logout } = useAuth();
-=======
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, Car, LogOut } from 'lucide-react';
 import { auth } from '../../lib/firebase';
 import { signOut } from 'firebase/auth';
@@ -19,7 +12,6 @@ const Footer = () => {
       console.error('Error signing out:', error);
     }
   };
->>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
 
   return (
     <footer className="bg-gray-900 text-white">
@@ -116,16 +108,6 @@ const Footer = () => {
                 Subscribe
               </button>
             </form>
-<<<<<<< HEAD
-            {user && (
-              <button
-                onClick={logout}
-                className="mt-4 w-full px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-md transition-colors"
-              >
-                Logout
-              </button>
-            )}
-=======
             <button
               onClick={handleSignOut}
               className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-md transition-colors"
@@ -133,7 +115,6 @@ const Footer = () => {
               <LogOut className="h-5 w-5" />
               Sign Out
             </button>
->>>>>>> 4bc38f67797257713a4dfcd7c9a81e2e9f3225ad
           </div>
         </div>
 

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { cars as initialCars } from '../data/cars';
+import { cars as initialCars } from '../data/cars.js';
 import { categories as initialCategories } from '../data/categories';
 
 const CarsContext = createContext(undefined);
