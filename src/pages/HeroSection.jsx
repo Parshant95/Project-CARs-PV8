@@ -18,7 +18,7 @@ const HeroSection = ({ user }) => {
       <div className="absolute inset-0 w-full h-full">
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40 z-10"></div>
         <img
-          src="src\data\wallpaperflare.com_wallpaper (1).jpg"
+          src="/images/wallpaperflare.com_wallpaper (1).jpg"
           alt="Luxury car background"
           className="absolute inset-0 w-full h-full object-cover"
         />
