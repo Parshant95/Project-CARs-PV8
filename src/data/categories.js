@@ -1,5 +1,5 @@
-import sportsCarImage from '../data/image.png';
-import electricCarImage from '../data/XEV9.png';
+import sportsCarImage from './image.png';
+import electricCarImage from './XEV9.png';
 
 export const categories = [
   {
