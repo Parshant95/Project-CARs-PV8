@@ -1,9 +1,11 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Button = ({
   children,
   variant = 'primary',
   href,
+  to,
   className = '',
   style,
   onClick,
@@ -17,6 +19,14 @@ const Button = ({
   };
   
   const classes = `${baseClasses} ${variantClasses[variant]} ${className}`;
+  
+  if (to) {
+    return (
+      <Link to={to} className={classes} style={style}>
+        {children}
+      </Link>
+    );
+  }
   
   if (href) {
     return (

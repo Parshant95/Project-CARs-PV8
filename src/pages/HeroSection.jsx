@@ -1,12 +1,17 @@
 import React from 'react';
 import { signInWithPopup } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 import { auth, googleProvider } from '../lib/firebase';
 import Button from './Button';
 
 const HeroSection = ({ user }) => {
+  const navigate = useNavigate();
+
   const handleGoogleLogin = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
+      // Redirect to home page after successful login
+      navigate('/home');
     } catch (error) {
       console.error('Error signing in with Google:', error);
     }
@@ -40,7 +45,7 @@ const HeroSection = ({ user }) => {
           {!user && (
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
               <Button 
-                href="/home" 
+                to="/home" 
                 variant="primary"
                 className="animate-fade-in" 
                 style={{ animationDelay: '0.3s' }}
@@ -59,7 +64,7 @@ const HeroSection = ({ user }) => {
           )}
           {user && (
             <Button 
-              href="/home" 
+              to="/home" 
               variant="primary"
               className="animate-fade-in" 
               style={{ animationDelay: '0.3s' }}
