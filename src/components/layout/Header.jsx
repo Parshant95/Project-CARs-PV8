@@ -1,32 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Menu, X, Search, Car } from 'lucide-react';
-import { auth } from '../../lib/firebase';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Menu, X, Search, Car } from "lucide-react";
+import { useAuth } from "../../context/AuthContext";
 
 const Header = () => {
+  const { isAdmin } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      console.log('Current user:', user?.email); // Debug log
-      const isUserAdmin = user?.email === 'ridergamer160@gmail.com';
-      console.log('Is user admin:', isUserAdmin); // Debug log
-      setIsAdmin(isUserAdmin);
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  // Debug log for current admin state
-  console.log('Current isAdmin state:', isAdmin);
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <header className="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-4 px-6 shadow-lg">
       <div className="container mx-auto flex justify-between items-center">
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           className="flex items-center space-x-2 text-2xl font-bold tracking-tight"
         >
           <Car className="h-6 w-6" />
@@ -34,12 +20,31 @@ const Header = () => {
         </Link>
 
         <div className="hidden md:flex items-center space-x-8">
-          <Link to="/" className="hover:text-red-500 transition-colors">Home</Link>
-          <Link to="/category/sports" className="hover:text-red-500 transition-colors">Sports</Link>
-          <Link to="/category/electric" className="hover:text-red-500 transition-colors">Electric</Link>
-          <Link to="/category/suv" className="hover:text-red-500 transition-colors">SUVs</Link>
+          <Link to="/" className="hover:text-red-500 transition-colors">
+            Home
+          </Link>
+          <Link
+            to="/category/sports"
+            className="hover:text-red-500 transition-colors"
+          >
+            Sports
+          </Link>
+          <Link
+            to="/category/electric"
+            className="hover:text-red-500 transition-colors"
+          >
+            Electric
+          </Link>
+          <Link
+            to="/category/suv"
+            className="hover:text-red-500 transition-colors"
+          >
+            SUVs
+          </Link>
           {isAdmin && (
-            <Link to="/admin" className="hover:text-red-500 transition-colors">Admin</Link>
+            <Link to="/admin" className="hover:text-red-500 transition-colors">
+              Admin
+            </Link>
           )}
         </div>
 
@@ -54,7 +59,7 @@ const Header = () => {
           <Search className="absolute right-3 top-2.5 h-4 w-4 text-gray-400" />
         </div>
 
-        <button 
+        <button
           className="md:hidden text-white"
           onClick={() => setIsOpen(!isOpen)}
         >
@@ -76,12 +81,42 @@ const Header = () => {
             <Search className="absolute right-3 top-2.5 h-4 w-4 text-gray-400" />
           </div>
           <div className="flex flex-col space-y-3">
-            <Link to="/" className="hover:text-red-500 transition-colors py-2 border-b border-gray-700" onClick={() => setIsOpen(false)}>Home</Link>
-            <Link to="/category/sports" className="hover:text-red-500 transition-colors py-2 border-b border-gray-700" onClick={() => setIsOpen(false)}>Sports</Link>
-            <Link to="/category/electric" className="hover:text-red-500 transition-colors py-2 border-b border-gray-700" onClick={() => setIsOpen(false)}>Electric</Link>
-            <Link to="/category/suv" className="hover:text-red-500 transition-colors py-2 border-b border-gray-700" onClick={() => setIsOpen(false)}>SUVs</Link>
+            <Link
+              to="/"
+              className="hover:text-red-500 transition-colors py-2 border-b border-gray-700"
+              onClick={() => setIsOpen(false)}
+            >
+              Home
+            </Link>
+            <Link
+              to="/category/sports"
+              className="hover:text-red-500 transition-colors py-2 border-b border-gray-700"
+              onClick={() => setIsOpen(false)}
+            >
+              Sports
+            </Link>
+            <Link
+              to="/category/electric"
+              className="hover:text-red-500 transition-colors py-2 border-b border-gray-700"
+              onClick={() => setIsOpen(false)}
+            >
+              Electric
+            </Link>
+            <Link
+              to="/category/suv"
+              className="hover:text-red-500 transition-colors py-2 border-b border-gray-700"
+              onClick={() => setIsOpen(false)}
+            >
+              SUVs
+            </Link>
             {isAdmin && (
-              <Link to="/admin" className="hover:text-red-500 transition-colors py-2" onClick={() => setIsOpen(false)}>Admin</Link>
+              <Link
+                to="/admin"
+                className="hover:text-red-500 transition-colors py-2"
+                onClick={() => setIsOpen(false)}
+              >
+                Admin
+              </Link>
             )}
           </div>
         </div>
@@ -90,4 +125,4 @@ const Header = () => {
   );
 };
 
-export default Header; 
+export default Header;

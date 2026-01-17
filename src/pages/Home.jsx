@@ -1,41 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useCars } from '../context/CarsContext';
-import CategoryCard from '../components/common/CategoryCard';
-import CarCard from '../components/common/CarCard';
-import CarList from '../components/CarList';
-import { ChevronRight, Calendar, ArrowRight, Car, Zap, TrendingUp, FileText } from 'lucide-react';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useCars } from "../context/CarsContext";
+import CategoryCard from "../components/common/CategoryCard";
+import CarCard from "../components/common/CarCard";
+import CarList from "../components/CarList";
+import {
+  ChevronRight,
+  Calendar,
+  ArrowRight,
+  Car,
+  Zap,
+  TrendingUp,
+  FileText,
+} from "lucide-react";
 import BrandSlider from "../components/common/BrandSlider";
-import { fetchLatestNews } from '../lib/api';
-import { auth } from '../lib/firebase';
-import SearchBar from '../components/SearchBar';
+import { fetchLatestNews } from "../lib/api";
+import { Helmet } from "react-helmet-async";
+import { useAuth } from "../context/AuthContext";
 
 const Home = () => {
   const { categories, cars } = useCars();
+  const { isAdmin } = useAuth();
   const featuredCars = cars.slice(0, 8);
-  const [userType, setUserType] = useState('user');
   const [news, setNews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchResults, setSearchResults] = useState(null);
-
-  useEffect(() => {
-    // Check if user is logged in and has admin email
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      console.log('Home - Current user:', user?.email); // Debug log
-      if (user && user.email === 'ridergamer260@gmail.com' || user && user.email === 'parshantvardhan63@gmail.com') {
-        console.log('Home - Setting admin access'); // Debug log
-        setUserType('admin');
-        localStorage.setItem('userType', 'admin');
-      } else {
-        console.log('Home - Setting regular user access'); // Debug log
-        setUserType('user');
-        localStorage.setItem('userType', 'user');
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -44,21 +33,21 @@ const Home = () => {
       try {
         setIsLoading(true);
         setError(null);
-        console.log('Loading news...');
+        console.log("Loading news...");
         const newsData = await fetchLatestNews();
-        console.log('News data received:', newsData);
-        
+        console.log("News data received:", newsData);
+
         if (isMounted) {
           if (newsData && newsData.length > 0) {
             setNews(newsData);
           } else {
-            setError('No news articles found');
+            setError("No news articles found");
           }
         }
       } catch (err) {
-        console.error('Error in loadNews:', err);
+        console.error("Error in loadNews:", err);
         if (isMounted) {
-          setError('Failed to load news. Please try again later.');
+          setError("Failed to load news. Please try again later.");
         }
       } finally {
         if (isMounted) {
@@ -77,25 +66,28 @@ const Home = () => {
 
   const getIconComponent = (iconName) => {
     switch (iconName) {
-      case 'zap':
+      case "zap":
         return Zap;
-      case 'car':
+      case "car":
         return Car;
-      case 'trending-up':
+      case "trending-up":
         return TrendingUp;
-      case 'file-text':
+      case "file-text":
         return FileText;
       default:
         return FileText;
     }
   };
 
-  const handleSearch = (results) => {
-    setSearchResults(results);
-  };
-
   return (
     <div className="min-h-screen bg-gray-900 text-white">
+      <Helmet>
+        <title>Project Cars | Premium Automobile Showcase</title>
+        <meta
+          name="description"
+          content="Discover the finest automobiles from around the world. Explore sports cars, electric vehicles, and SUVs with Project Cars."
+        />
+      </Helmet>
       {/* Hero Section */}
       <section className="relative h-[80vh]">
         <div className="absolute inset-0">
@@ -112,26 +104,28 @@ const Home = () => {
           </video>
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent"></div>
         </div>
-        
+
         <div className="relative container mx-auto px-6 h-full flex flex-col justify-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-4">
             Welcome to <span className="text-red-500">Project Cars</span>
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-2xl">
-            Discover the finest automobiles from around the world with detailed specifications and stunning imagery.
+            Discover the finest automobiles from around the world with detailed
+            specifications and stunning imagery.
           </p>
-          
-          {/* Add SearchBar component */}
-          <div className="mb-8">
-            <SearchBar onSearch={handleSearch} />
-          </div>
 
           <div className="flex flex-wrap gap-4">
-            <Link to="/category/sports" className="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-md text-white font-medium transition-colors">
+            <Link
+              to="/category/sports"
+              className="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-md text-white font-medium transition-colors"
+            >
               Explore Sports Cars
             </Link>
-            {userType === 'admin' && (
-              <Link to="/admin" className="bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-md text-white font-medium transition-colors">
+            {isAdmin && (
+              <Link
+                to="/admin"
+                className="bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-md text-white font-medium transition-colors"
+              >
                 Add New Car
               </Link>
             )}
@@ -139,23 +133,11 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Display AI Search Results */}
-      {searchResults && (
-        <section className="py-8 bg-gray-800">
-          <div className="container mx-auto px-6">
-            <h2 className="text-2xl font-bold mb-6">AI Recommendations</h2>
-            <div className="bg-gray-700 rounded-lg p-6">
-              <pre className="whitespace-pre-wrap text-gray-200">
-                {JSON.stringify(searchResults, null, 2)}
-              </pre>
-            </div>
-          </div>
-        </section>
-      )}
-
       <div>
         <section className="bg-auto py-8">
-          <h2 className="text-3xl font-bold text-center mb-4">Our Trusted Brands</h2>
+          <h2 className="text-3xl font-bold text-center mb-4">
+            Our Trusted Brands
+          </h2>
           <BrandSlider />
         </section>
 
@@ -166,10 +148,12 @@ const Home = () => {
               <div className="flex justify-between items-center mb-10">
                 <div>
                   <h2 className="text-3xl font-bold">Latest Automotive News</h2>
-                  <p className="text-gray-400 mt-2">Top 5 latest updates from the automotive world</p>
+                  <p className="text-gray-400 mt-2">
+                    Top 5 latest updates from the automotive world
+                  </p>
                 </div>
               </div>
-              
+
               {isLoading ? (
                 <div className="text-center py-8">
                   <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-500 mx-auto"></div>
@@ -184,8 +168,8 @@ const Home = () => {
                   {news.map((newsItem) => {
                     const Icon = getIconComponent(newsItem.icon);
                     return (
-                      <a 
-                        key={newsItem.id} 
+                      <a
+                        key={newsItem.id}
                         href={newsItem.link}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -194,8 +178,8 @@ const Home = () => {
                         <div className="flex items-start gap-6">
                           {newsItem.imageUrl ? (
                             <div className="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
-                              <img 
-                                src={newsItem.imageUrl} 
+                              <img
+                                src={newsItem.imageUrl}
                                 alt={newsItem.title}
                                 className="w-full h-full object-cover"
                               />
@@ -214,21 +198,29 @@ const Home = () => {
                                 {newsItem.category}
                               </span>
                             </div>
-                            <p className="text-gray-300 mb-3">{newsItem.excerpt}</p>
+                            <p className="text-gray-300 mb-3">
+                              {newsItem.excerpt}
+                            </p>
                             <div className="flex items-center justify-between">
                               <div className="flex items-center text-gray-400 text-sm">
                                 <Calendar className="h-4 w-4 mr-2" />
-                                {new Date(newsItem.date).toLocaleDateString('en-IN', {
-                                  year: 'numeric',
-                                  month: 'long',
-                                  day: 'numeric'
-                                })}
+                                {new Date(newsItem.date).toLocaleDateString(
+                                  "en-IN",
+                                  {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                  }
+                                )}
                                 {newsItem.source && (
-                                  <span className="ml-4 text-gray-500">Source: {newsItem.source}</span>
+                                  <span className="ml-4 text-gray-500">
+                                    Source: {newsItem.source}
+                                  </span>
                                 )}
                               </div>
                               <span className="text-red-500 font-medium inline-flex items-center">
-                                Read More <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                                Read More{" "}
+                                <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
                               </span>
                             </div>
                           </div>
@@ -242,14 +234,16 @@ const Home = () => {
           </div>
         </section>
       </div>
-      
+
       {/* Categories Section */}
       <section className="py-16 bg-gradient-to-b from-gray-900 to-gray-800">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-10 text-center">Explore the World of Cars</h2>
-          
+          <h2 className="text-3xl font-bold mb-10 text-center">
+            Explore the World of Cars
+          </h2>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {categories.map(category => (
+            {categories.map((category) => (
               <CategoryCard key={category.id} category={category} />
             ))}
           </div>
@@ -260,10 +254,14 @@ const Home = () => {
       <section className="py-16 bg-gray-800">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4 text-gray-100">Featured Cars</h2>
-            <p className="text-gray-100 text-lg">Discover our handpicked selection of premium vehicles</p>
+            <h2 className="text-3xl font-bold mb-4 text-gray-100">
+              Featured Cars
+            </h2>
+            <p className="text-gray-100 text-lg">
+              Discover our handpicked selection of premium vehicles
+            </p>
           </div>
-          
+
           <CarList limit={8} />
         </div>
       </section>
@@ -271,4 +269,4 @@ const Home = () => {
   );
 };
 
-export default Home; 
+export default Home;

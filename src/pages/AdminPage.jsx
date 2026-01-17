@@ -1,21 +1,33 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useCars } from '../context/CarsContext';
-import CarForm from '../components/admin/CarForm';
-import { Edit, Trash2, Plus, ArrowLeft, X } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useCars } from "../context/CarsContext";
+import { useAuth } from "../context/AuthContext";
+import CarForm from "../components/admin/CarForm";
+import { Edit, Trash2, Plus, ArrowLeft, X } from "lucide-react";
+import LoadingSpinner from "../components/common/LoadingSpinner";
 
 const AdminPage = () => {
   const { cars } = useCars();
+  const { isAdmin, loading } = useAuth();
+  const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
-  const [successMessage, setSuccessMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState("");
+
+  useEffect(() => {
+    if (!loading && !isAdmin) {
+      navigate("/");
+    }
+  }, [isAdmin, loading, navigate]);
+
+  if (loading) return <LoadingSpinner />;
 
   const handleSuccess = () => {
-    setSuccessMessage('Car added successfully!');
+    setSuccessMessage("Car added successfully!");
     setShowForm(false);
-    
+
     // Clear success message after 3 seconds
     setTimeout(() => {
-      setSuccessMessage('');
+      setSuccessMessage("");
     }, 3000);
   };
 
@@ -28,16 +40,19 @@ const AdminPage = () => {
           </Link>
           <h1 className="text-3xl font-bold">Admin Dashboard</h1>
         </div>
-        
+
         {successMessage && (
           <div className="bg-green-600 text-white p-4 rounded-lg mb-6 flex justify-between items-center">
             <p>{successMessage}</p>
-            <button onClick={() => setSuccessMessage('')} className="text-white">
+            <button
+              onClick={() => setSuccessMessage("")}
+              className="text-white"
+            >
               <X className="h-5 w-5" />
             </button>
           </div>
         )}
-        
+
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-semibold">Manage Cars</h2>
           <button
@@ -57,13 +72,13 @@ const AdminPage = () => {
             )}
           </button>
         </div>
-        
+
         {showForm && (
           <div className="mb-10">
             <CarForm onSuccess={handleSuccess} />
           </div>
         )}
-        
+
         <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
           <div className="overflow-x-auto">
             <table className="w-full">
@@ -88,8 +103,11 @@ const AdminPage = () => {
               </thead>
               <tbody className="divide-y divide-gray-700">
                 {cars.length > 0 ? (
-                  cars.map(car => (
-                    <tr key={car.id} className="hover:bg-gray-750 transition-colors">
+                  cars.map((car) => (
+                    <tr
+                      key={car.id}
+                      className="hover:bg-gray-750 transition-colors"
+                    >
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="h-12 w-12 flex-shrink-0 mr-4">
@@ -100,14 +118,21 @@ const AdminPage = () => {
                             />
                           </div>
                           <div>
-                            <div className="text-sm font-medium">{car.name}</div>
-                            <div className="text-sm text-gray-400">{car.transmission}</div>
+                            <div className="text-sm font-medium">
+                              {car.name}
+                            </div>
+                            <div className="text-sm text-gray-400">
+                              {car.transmission}
+                            </div>
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm">
                         <span className="inline-block bg-gray-700 text-gray-300 px-2 py-1 rounded-full">
-                          {car.category.charAt(0).toUpperCase() + car.category.slice(1)}
+                          {car.category
+                            ? car.category.charAt(0).toUpperCase() +
+                              car.category.slice(1)
+                            : "Unknown"}
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm">
@@ -134,7 +159,10 @@ const AdminPage = () => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={5} className="px-6 py-8 text-center text-gray-400">
+                    <td
+                      colSpan={5}
+                      className="px-6 py-8 text-center text-gray-400"
+                    >
                       No cars found. Click "Add New Car" to create one.
                     </td>
                   </tr>
@@ -148,4 +176,4 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage; 
+export default AdminPage;
